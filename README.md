@@ -1,4 +1,4 @@
 project-nxt
 ===========
 
-Programming projects completed during university studies
+A programming project with LEGO NXTs completed during university studies.
