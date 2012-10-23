@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="lib" path="/Users/alexandervetter/Development/leJOS_NXJ/lib/nxt/classes.jar" sourcepath="/Users/alexandervetter/Development/leJOS_NXJ/lib/nxt/classes-src.zip"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="var" path="NXJ_HOME/lib/nxt/classes.jar" sourcepath="/NXJ_HOME/lib/nxt/classes-src.zip"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
