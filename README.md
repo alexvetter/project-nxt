@@ -3,6 +3,11 @@ project-nxt
 
 A programming project with LEGO NXTs completed during university studies.
 
+Read first!
+===========
+* http://lejos.sourceforge.net/nxt/nxj/tutorial/
+* http://roberta-home.de/de/was-bietet-roberta/roberta-reihe/installationsanleitung-lejos-unter-eclipse
+
 
 How to build
 ============
