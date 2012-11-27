@@ -7,9 +7,9 @@ import lejos.nxt.Motor;
 import lejos.robotics.navigation.DifferentialPilot;
 
 public class Quadrat {
-	public static void main(String[] args) {
-		final DifferentialPilot pilot = new DifferentialPilot(2.4f, 14.5f, Motor.A, Motor.B, false);
-		
+	static final DifferentialPilot pilot = new DifferentialPilot(3.4f, 15.75f, Motor.A, Motor.C, false);
+	
+	public static void main(String[] args) throws Exception {
 		Button.ESCAPE.addButtonListener(new ButtonListener() {
 			public void buttonPressed(Button b) {
 				LCD.drawString("Stopping...", 0, 0);
@@ -21,21 +21,23 @@ public class Quadrat {
 				System.exit(0);
 			}
 		});
+		
+		loop();
+	} // main
 
+	public static void loop() throws Exception {
 		LCD.drawString("Ready...", 0, 0);
 		Button.ENTER.waitForPress();
 		
-		
-		pilot.setRotateSpeed(500);
-		pilot.forward();
+		pilot.setRotateSpeed(50);
+		//pilot.setAcceleration(1);
+		//pilot.forward();
 		
 		while (true) {
 			pilot.stop();
-			pilot.travel(20);
-			
+			//pilot.travel(50.0f);
+			Thread.sleep(1000);
 			pilot.rotate(90);
 		}
-		
-	} // main
-
+	}
 }
