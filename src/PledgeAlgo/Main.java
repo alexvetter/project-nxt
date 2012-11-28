@@ -15,8 +15,8 @@ public class Main {
 	static boolean isStop = false;
 	static boolean isExit = false;
 	static boolean startUltrasonic = false;
-	static boolean first = false;
-	static int driveCount = 0;
+
+	static int turnCount = 0;
 	public static TouchSensor touchSensor1 = new TouchSensor(SensorPort.S1);
 	public static TouchSensor touchSensor2 = new TouchSensor(SensorPort.S2);
 	public static UltrasonicSensor ultrasonicSensor = new UltrasonicSensor(SensorPort.S3);
@@ -36,14 +36,13 @@ public class Main {
 
 		        	if(aNewValue < 1000 && aOldValue != 0 && isStop == false)
 		        	{
-		        		System.out.println(aOldValue + " -- " + aNewValue);
-		        		first = true;
 		        		isStop = true;
+		        		Drive.ultrasonicDisable = false;
 	                    Drive.driveStop();  
-		                Drive.driveBackward(300);
+		                Drive.driveBackward(250);
 		                Drive.driveRight();
 		                Drive.driveForward();
-		                startUltrasonic = true;
+		                //startUltrasonic = true;
 		                isStop = false;
 		        	}	
 	            	
@@ -59,14 +58,12 @@ public class Main {
 	        {
 	        	if(aNewValue < 1000 && aOldValue != 0 && isStop == false)
 	        	{
-	        		System.out.println(aOldValue + " -- " + aNewValue);
-	        		first = true;
 	        		isStop = true;
+	        		Drive.ultrasonicDisable = false;
                     Drive.driveStop();  
-	                Drive.driveBackward(300);
+	                Drive.driveBackward(250);
 	                Drive.driveRight();
-	                Drive.driveForward();
-	                startUltrasonic = true;
+	                //startUltrasonic = true;
 	                isStop = false;
 	        	}	
 	        	
@@ -80,34 +77,44 @@ public class Main {
         Motor.A.forward();
     	Motor.C.forward();
     	
-    	
-        Button.ENTER.addButtonListener(new ButtonListener() {
-            public void buttonPressed(Button b) {
-              LCD.drawString("ENTER pressed", 0, 0);
-            }
+    	Button.ESCAPE.addButtonListener(new ButtonListener() {
+			public void buttonPressed(Button b) {
+				LCD.drawString("Stopping...", 0, 0);
+				Drive.driveStop();
+			}
 
-            public void buttonReleased(Button b) {
-            	isExit = true;
-                Drive.driveStop();
-                
-            }
-          }); 
+			public void buttonReleased(Button b) {
+				isExit = true;
+				LCD.clear();
+				System.exit(0);
+			}
+		});
+    	
+    	
+		
+		/*while (true) {
+			Drive.driveStop();
+			//pilot.travel(50.0f);
+			Drive.wait(1000);
+			Drive.driveLeft();
+		}*/
         
         
         while(isExit == false){        	
            
-            if(startUltrasonic) {
+            if(ultrasonicSensor.getDistance() < 20 && Drive.ultrasonicDisable == false){
+            	startUltrasonic = true;
+            }
+            
+        	if(startUltrasonic) {
             	Drive.checkDistance(ultrasonicSensor.getDistance());
             }
             else
-            	Drive.wait(200);	
-        	  
-            //LCD.clear();
-            //LCD.drawInt(value, 0, 3);
-            //LCD.refresh();                     
+            	Drive.wait(300);	
+        	                    
          }
 
         	
-        Button.waitForAnyPress();
+        //Button.waitForAnyPress();
     }
 }
